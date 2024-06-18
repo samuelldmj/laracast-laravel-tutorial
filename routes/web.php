@@ -10,9 +10,9 @@ Route::get('/', function () {
 });
 
 
-Route::get('/job', function () {
+Route::get('/jobs', function () {
     return view(
-        'job',
+        'jobs',
 
         [
             'jobs' => [
@@ -37,10 +37,37 @@ Route::get('/job', function () {
 });
 
 
-Route::get('/job/{id}', function ($id) {
+Route::get(
+    '/job/{id}',
+    function ($id) {
 
-    dd($id);
-    return view('contact');
+        $jobs = [
+            [
+                'id' => 1,
+                'decs' => 'Programmer',
+                'salary' => '$10000',
+            ],
+            [
+                'id' => 2,
+                'decs' => 'Teacher',
+                'salary' => '$50000'
+            ],
+            [
+                'id' => 3,
+                'decs' => 'Doctor',
+                'salary' => '$17000'
+            ]
+        ];
+
+        $job = Arr::first(
+            $jobs,
+            fn ($e) => $e['id'] == $id
+        );
+        // dd($job);
+
+
+
+        return view('job', ['job' => $job]);
 });
 
 Route::get('/contact', function () {
