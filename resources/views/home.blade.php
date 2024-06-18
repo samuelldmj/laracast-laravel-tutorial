@@ -3,5 +3,5 @@
           Home page
      </x-slot:header>
     
-     <h1>Hello World! from Home page</h1>
+     <h1>{{$greetings}} World! from Home page. my name is {{$name}}</h1>
 </x-layouts>
