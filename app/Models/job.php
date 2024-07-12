@@ -17,5 +17,11 @@ class Job extends Model
     {
         return $this->belongsTo(Employer::class);
     }
+
+    //job model  relationship with tag models is a hastomany.
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
 }
 
