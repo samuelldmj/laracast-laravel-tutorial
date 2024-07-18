@@ -15,9 +15,11 @@ Route::get('/', function () {
 
 
 Route::get('/jobs', function () {
+    //lazing loading
+    $jobs = Job::with('employer')->get();
     return view(
         'jobs',
-        ['jobs' => Job::all()]
+        ['jobs' => $jobs]
     );  
 });
 
