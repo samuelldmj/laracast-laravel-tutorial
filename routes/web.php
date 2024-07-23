@@ -16,7 +16,7 @@ Route::get('/', function () {
 
 Route::get('/jobs', function () {
     //lazing loading
-    $jobs = Job::with('employer')->get();
+    $jobs = Job::with('employer')->paginate(3);
     return view(
         'jobs',
         ['jobs' => $jobs]

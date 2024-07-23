@@ -12,5 +12,9 @@
           <div><strong> {{$job['decs']}}: </strong> earns {{$job['salary']}} per year.</div>
       </a>
      @endforeach
+        
+            <div>
+            {{$jobs->links()}}
+            </div>
      </div>
 </x-layouts>
