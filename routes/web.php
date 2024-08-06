@@ -16,22 +16,38 @@ Route::get('/', function () {
 
 Route::get('/jobs', function () {
     //lazing loading
-    $jobs = Job::with('employer')->paginate(3);
+    $jobs = Job::with('employer')->latest()->paginate(3);
     return view(
-        'jobs',
+        'jobs.index',
         ['jobs' => $jobs]
     );  
 });
 
+Route::get('/jobs/create', function () {
+    return view('jobs.create');
+});
 
 Route::get(
     '/job/{id}',
     function ($id) {
         $job = Job::find($id);
         // dd($job);
-        return view('job', ['job' => $job]);
+        return view('jobs.show', ['job' => $job]);
+    }
+);
 
+Route::post('/jobs', function () {
+    // dd(request()->all());
+    // return view('jobs.create');
+    Job::create([
+        'decs' => request('decs'),
+        'salary' => request('salary'),
+        'employer_id' => 1
+    ]);
+
+    return redirect('/jobs');
 });
+
 
 Route::get('/contact', function () {
 return view('contact');

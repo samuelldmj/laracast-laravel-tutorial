@@ -11,7 +11,7 @@ class Job extends Model
     use HasFactory;
     protected $table = 'job_listing';
 
-    protected  $fillable = ['decs', 'salary'];
+    protected  $fillable = ['decs', 'salary', 'employer_id'];
 
     public function employer(): BelongsTo
     {
@@ -24,4 +24,3 @@ class Job extends Model
         return $this->belongsToMany(Tag::class);
     }
 }
-
