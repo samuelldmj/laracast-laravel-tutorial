@@ -16,8 +16,19 @@
           <label for="decs" class="block text-sm font-medium leading-6 text-gray-900">Title</label>
           <div class="mt-2">
             <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-              <input type="text" name="decs" id="decs" class=" px-3 block flex-1 border-0 bg-transparent py-1.5  text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" placeholder="Job Title">
+              <input type="text" name="decs" id="decs" class=" px-3 block flex-1 border-0 bg-transparent py-1.5  text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" placeholder="Job Title" required >
             </div>
+            {{-- @if ($errors->any())
+              <ul class="mt-5">
+                @foreach ( $errors->all() as $error)
+                  <li class="text-red-500 italic">{{$error}}</li>
+                @endforeach
+              </ul>
+            @endif --}}
+
+            @error('decs')
+              <p class=" mt-1 text-xs font-semi-bold text-red-500 italic">{{$message}}</p>
+            @enderror
           </div>
         </div>
       </div>
@@ -28,8 +39,11 @@
           <label for="salary" class="block text-sm font-medium leading-6 text-gray-900">Salary</label>
           <div class="mt-2">
             <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-              <input type="text" name="salary" id="salary" class=" px-3 block flex-1 border-0 bg-transparent py-1.5  text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" placeholder="$50,000 per year">
+              <input type="text" name="salary" id="salary" class=" px-3 block flex-1 border-0 bg-transparent py-1.5  text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" placeholder="$50,000 per year" required >
             </div>
+             @error('salary')
+              <p class=" mt-1 text-xs font-semi-bold text-red-500 italic">{{$message}}</p>
+            @enderror
           </div>
         </div>
     </div>
