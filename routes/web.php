@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\JobController;
+use App\Http\Controllers\RegisteredUserController;
+use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
-use App\Models\Job;
+
 
 Route::get('/', function () {
     return view(
@@ -14,90 +17,83 @@ Route::get('/', function () {
 });
 
 //all jobs
-Route::get('/jobs', function () {
-    //lazing loading
-    $jobs = Job::with('employer')->latest()->paginate(3);
-    return view(
-        'jobs.index',
-        ['jobs' => $jobs]
-    );
+// Route::get('/jobs', [JobController::class, 'index']);
+
+// //create a new job
+// Route::get('/jobs/create', [JobController::class, 'create']);
+
+
+
+// //=======================================================================================================
+
+// //show existing job
+// // Route::get(
+// //     '/job/{id}',
+// //     function ($id) {
+// //         $job = Job::findOrFail($id);
+// //         // dd($job);
+// //         return view('jobs.show', ['job' => $job]);
+// //     }
+// // );
+
+
+// Route::get(
+//     '/job/{job}',
+//     [JobController::class, 'show']
+
+// );
+// //==========================================================================================================
+
+// //store a new job
+// Route::post('/jobs', [JobController::class, 'store']);
+
+// //edit job
+// Route::get(
+//     '/job/{id}/edit',
+//     [JobController::class, 'edit']
+
+// );
+
+// //update job
+// Route::patch(
+//     '/job/{id}',
+//     // to be able to use the id we need to pass it as parameter into the function
+//     [JobController::class, 'update']
+// );
+
+// //delete job
+// Route::delete(
+//     '/job/{id}',
+//     [jobController::class, 'destroy']
+
+// );
+
+
+
+
+
+//using grouping route
+Route::controller(JobController::class)->group(function () {
+    Route::get('/jobs',  'index');
+    Route::get('/jobs/create',  'create');
+    Route::get('/job/{job}', 'show');
+    Route::post('/jobs',  'store');
+    Route::get('/job/{id}/edit', 'edit');
+    Route::patch('/job/{job}', 'update');
+    Route::delete('/job/{id}', 'destroy');
 });
 
-//create a new job
-Route::get('/jobs/create', function () {
-    return view('jobs.create');
-});
 
-//show existing job
-Route::get(
-    '/job/{id}',
-    function ($id) {
-        $job = Job::findOrFail($id);
-        // dd($job);
-        return view('jobs.show', ['job' => $job]);
-    }
-);
-
-//store a new job
-Route::post('/jobs', function () {
-    // dd(request()->all());
-    // return view('jobs.create');
-
-    request()->validate([
-        'decs' => ['required', 'min:3'],
-        'salary' => ['required'],
-        'employer_id' => ''
-    ]);
-
-    // Job::create([
-    //     'decs' => request('decs'),
-    //     'salary' => request('salary'),
-    //     'employer_id' => 1
-    // ]);
-
-    return redirect('/jobs');
-});
-
-//edit job
-Route::get(
-    '/job/{id}/edit',
-    function ($id) {
-        $job = Job::findOrFail($id);
-        // dd($job);
-        return view('jobs.edit', ['job' => $job]);
-    }
-);
-
-//update job
-Route::patch(
-    '/job/{id}',
-    // to be able to use the id we need to pass it as parameter into the function
-    function ($id) {
-        $job = Job::findOrFail($id);
-
-        $job->update([
-            'decs' => request('decs'),
-            'salary' => request('salary')
-        ]);
-
-
-        return redirect('/job/' . $job->id);
-    }
-);
-
-//delete job
-Route::delete(
-    '/job/{id}',
-    function ($id) {
-        $job = Job::findOrFail($id);
-        $job->delete();
-
-        return redirect('/jobs');
-    }
-
-);
-
+//using route resource
+// Route::resource('jobs', JobController::class);
 
 Route::get('/contact', function () {
     return view('contact');
 });
+
+//Auth
+Route::get('/register', [RegisteredUserController::class, 'create']);
+Route::post('/register', [RegisteredUserController::class, "strore"]);
+
+Route::get('/login', [SessionController::class, 'create']);
+Route::post('/login', [SessionController::class, "strore"]);
