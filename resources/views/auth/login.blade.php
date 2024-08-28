@@ -8,7 +8,7 @@
         <div>
             <div class="border-gray-900/10 pb-7">
                 <x-form-label for='email'>E-mail</x-form-label>
-                <x-form-input id="email" name="email" placeholder="E-mail" />
+                <x-form-input id="email" name="email" :value="old('email')" placeholder="E-mail" />
                 <x-form-error name="email"></x-form-error>
             </div>
         </div>

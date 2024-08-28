@@ -41,10 +41,19 @@
             <!-- Profile dropdown -->
             <div class="relative ml-3">
               <div>
+                {{-- would be absent when user is not logged in --}}
                 @guest
                   <x-nav-link href="/login" :active="request()->is('login')">Log in</x-nav-link>
                   <x-nav-link href="/register" :active="request()->is('register')">Register</x-nav-link>
                 @endguest
+
+                {{--  --}}
+                @auth
+                  <form method="POST" action="/logout">
+                    @csrf
+                  <x-form-button >Log Out</x-form-button>
+                  </form>
+               @endauth
                  
               </div>
               
