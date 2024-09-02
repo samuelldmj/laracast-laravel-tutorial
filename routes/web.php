@@ -78,7 +78,7 @@ Route::controller(JobController::class)->group(function () {
     Route::get('/jobs/create',  'create');
     Route::get('/job/{job}', 'show');
     Route::post('/jobs',  'store');
-    Route::get('/job/{id}/edit', 'edit');
+    Route::get('/job/{job}/edit', 'edit');
     Route::patch('/job/{job}', 'update');
     Route::delete('/job/{id}', 'destroy');
 });

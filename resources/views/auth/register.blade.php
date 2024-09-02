@@ -16,7 +16,7 @@
           <div class="mt-2">
 
             {{-- input component --}}
-           <x-form-input   id="name" name="name" placeholder="Full Name" required  />
+           <x-form-input   id="name" name="name" placeholder="Full Name" :value="old('name')"  required  />
            <x-form-error name="name"></x-form-error>
           </div>
         </div>
@@ -27,7 +27,7 @@
           <x-form-label for='email'>E-mail</x-form-label>
           <div class="mt-2">
             {{-- input component --}}
-           <x-form-input id="email" name="email" placeholder="E-mail"  required   />
+           <x-form-input id="email" name="email" placeholder="E-mail" :value="old('email')" required   />
            <x-form-error name="email"></x-form-error>
           </div>
         </div>
