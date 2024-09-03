@@ -69,6 +69,9 @@ Route::get('/', function () {
 // );
 
 
+//testing mail route
+Route::get('test', function () {});
+
 
 
 
